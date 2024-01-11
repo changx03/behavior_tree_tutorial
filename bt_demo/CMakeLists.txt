@@ -39,11 +39,19 @@ target_include_directories(generic_ports PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
+add_executable(async_bt src/async_bt.cpp)
+ament_target_dependencies(async_bt PUBLIC behaviortree_cpp)
+target_include_directories(async_bt PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 install(TARGETS
   bt_sample
   first_bt
   blackboard
   generic_ports
+  async_bt
   DESTINATION lib/${PROJECT_NAME}
 )
 

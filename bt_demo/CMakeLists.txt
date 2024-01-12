@@ -46,12 +46,20 @@ target_include_directories(async_bt PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
+add_executable(pass_through_door src/pass_through_door.cpp)
+ament_target_dependencies(pass_through_door PUBLIC behaviortree_cpp)
+target_include_directories(pass_through_door PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 install(TARGETS
   bt_sample
   first_bt
   blackboard
   generic_ports
   async_bt
+  pass_through_door
   DESTINATION lib/${PROJECT_NAME}
 )
 

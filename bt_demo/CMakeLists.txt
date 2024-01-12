@@ -9,7 +9,12 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_package(action_tutorials_interfaces REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
+find_package(behaviortree_ros2 REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
 add_executable(bt_sample src/00_bt_sample.cpp)
 ament_target_dependencies(bt_sample PUBLIC behaviortree_cpp)
@@ -67,6 +72,20 @@ target_include_directories(scripting PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
+add_executable(fibonacci src/ros2_01_fibonacci.cpp)
+ament_target_dependencies(fibonacci PUBLIC
+  action_tutorials_interfaces
+  behaviortree_cpp 
+  behaviortree_ros2
+  rclcpp
+  rclcpp_action
+  rclcpp_components
+)
+target_include_directories(fibonacci PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 install(TARGETS
   bt_sample
   first_bt
@@ -76,6 +95,7 @@ install(TARGETS
   pass_through_door
   port_remapping
   scripting
+  fibonacci
   DESTINATION lib/${PROJECT_NAME}
 )
 

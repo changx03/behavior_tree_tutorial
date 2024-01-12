@@ -11,44 +11,58 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
 
-add_executable(bt_sample src/bt_sample.cpp)
+add_executable(bt_sample src/00_bt_sample.cpp)
 ament_target_dependencies(bt_sample PUBLIC behaviortree_cpp)
 target_include_directories(bt_sample PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
-add_executable(first_bt src/first_bt.cpp)
+add_executable(first_bt src/01_first_bt.cpp)
 ament_target_dependencies(first_bt PUBLIC behaviortree_cpp)
 target_include_directories(first_bt PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
-add_executable(blackboard src/blackboard.cpp)
+add_executable(blackboard src/02_blackboard.cpp)
 ament_target_dependencies(blackboard PUBLIC behaviortree_cpp)
 target_include_directories(blackboard PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
-add_executable(generic_ports src/generic_ports.cpp)
+add_executable(generic_ports src/03_generic_ports.cpp)
 ament_target_dependencies(generic_ports PUBLIC behaviortree_cpp)
 target_include_directories(generic_ports PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
-add_executable(async_bt src/async_bt.cpp)
+add_executable(async_bt src/04_async_bt.cpp)
 ament_target_dependencies(async_bt PUBLIC behaviortree_cpp)
 target_include_directories(async_bt PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
-add_executable(pass_through_door src/pass_through_door.cpp)
+add_executable(pass_through_door src/05_pass_through_door.cpp)
 ament_target_dependencies(pass_through_door PUBLIC behaviortree_cpp)
 target_include_directories(pass_through_door PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+add_executable(port_remapping src/06_port_remapping.cpp)
+ament_target_dependencies(port_remapping PUBLIC behaviortree_cpp)
+target_include_directories(port_remapping PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+add_executable(scripting src/09_scripting.cpp)
+ament_target_dependencies(scripting PUBLIC behaviortree_cpp)
+target_include_directories(scripting PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
@@ -60,6 +74,8 @@ install(TARGETS
   generic_ports
   async_bt
   pass_through_door
+  port_remapping
+  scripting
   DESTINATION lib/${PROJECT_NAME}
 )
 

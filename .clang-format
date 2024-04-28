@@ -1,0 +1,22 @@
+Language: Cpp
+BasedOnStyle: Microsoft
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 200
+ReflowComments: true
+AllowShortBlocksOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+AlignAfterOpenBracket: Align
+AlignTrailingComments: false
+SortIncludes: CaseInsensitive
+IncludeBlocks: Regroup
+PackConstructorInitializers: Never
+PointerAlignment: Left
+QualifierAlignment: Leave
+ReferenceAlignment: Left
+SeparateDefinitionBlocks: Always
+AccessModifierOffset: -4
+BreakBeforeBraces: Allman
+

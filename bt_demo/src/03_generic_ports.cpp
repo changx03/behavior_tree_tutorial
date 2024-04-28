@@ -10,9 +10,10 @@ struct Position2D
 // Template specialization to converts a string to Position2D.
 template <> inline Position2D BT::convertFromString(BT::StringView str)
 {
+    // StringView is a C++11 version of std::string_view. std::string_view is a read-only, non-owning view of a char sequence.
     // We expect real numbers separated by semicolons
     auto parts = BT::splitString(str, ';');
-    if(parts.size() != 2) { throw BT::RuntimeError("invalid input)"); }
+    if (parts.size() != 2) { throw BT::RuntimeError("invalid input)"); }
     else
     {
         Position2D output;
@@ -24,7 +25,7 @@ template <> inline Position2D BT::convertFromString(BT::StringView str)
 
 class CalculateGoal : public BT::SyncActionNode
 {
-  public:
+public:
     CalculateGoal(const std::string& name, const BT::NodeConfig& config)
         : SyncActionNode(name, config)
     {
@@ -45,7 +46,7 @@ class CalculateGoal : public BT::SyncActionNode
 
 class PrintTarget : public BT::SyncActionNode
 {
-  public:
+public:
     PrintTarget(const std::string& name, const BT::NodeConfig& config)
         : SyncActionNode(name, config)
     {
@@ -61,7 +62,7 @@ class PrintTarget : public BT::SyncActionNode
     BT::NodeStatus tick() override
     {
         auto res = this->getInput<Position2D>("target");
-        if(!res) { throw BT::RuntimeError("error reading port [target]:", res.error()); }
+        if (!res) { throw BT::RuntimeError("error reading port [target]:", res.error()); }
         Position2D target = res.value();
         printf("Target positions: [ %.1f, %.1f ]\n", target.x, target.y);
         return BT::NodeStatus::SUCCESS;
@@ -77,6 +78,6 @@ int main(int argc, char const* argv[])
     std::string xml_path = "xml/generic_ports.xml";
     auto tree = factory.createTreeFromFile(xml_path);
     tree.tickWhileRunning();
-    
+
     return 0;
 }
